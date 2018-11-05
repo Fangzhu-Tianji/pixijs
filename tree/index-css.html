@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="css/reset.css">
+<script src="js/size.js"></script>
+<style>
+html,body { width: 100%; height: 100%; overflow: hidden; }
+.container-box { width: 100%; height: 100%; background: #9EE3EB url(images/bg5_fresh.webp) no-repeat center bottom; background-size: contain; position: relative; }
+/* 树 */
+.tree-bed { width: 4.24rem; position: absolute; left: 50%; bottom: 3.5rem; transform: translateX(-50%); }
+.tree-content { width: 2.66rem; height: 3.56rem; position: absolute; left: 50%; bottom: 4.5rem; transform: translateX(-50%); }
+.tree-shake { animation: treeShake 1s linear; }
+/* 云 */
+.sunlight { width: 200px; position: absolute; top: 0; right: 0; }
+.clound1 { width: 150px; position: absolute; top: 20px; animation: cloundAnimated1 70s linear infinite alternate; }
+.clound2 { width: 90px; position: absolute; top: 80px; animation: cloundAnimated2 60s linear infinite alternate; }
+/* 风车 */
+.windMillBg { width: .6rem; position: absolute; bottom: 7.8rem; left: 1.2rem; }
+.windMill { width: 1.2rem; position: absolute; bottom: 7.8rem; left: .9rem; animation: windMill 10s linear infinite; }
+/* 底部阴影盒子 */
+.bottom-content { box-sizing: border-box; width: 100%; height: 1.6rem; padding: .2rem 0; background: rgba(0, 0, 0, .3); position: fixed; bottom: 0; left: 0; }
+.bottom-content .wrap { box-sizing: border-box; width: 1.2rem; padding: 0 .1rem; }
+.bottom-content .pic img { box-sizing: border-box; display: block; width: .9rem; height: .9rem; border: 1px solid #ffffff; border-radius: 50%; margin: 0 auto .05rem; }
+.bottom-content .name { font-size: 12px; color: #ffffff; text-align: center; }
+/* 水壶 */
+.watering-content { width: 1.44rem; height: 1.6rem; background: url(images/wateringBg_v4.webp) no-repeat center top; background-size: contain; position: absolute; bottom: 1.6rem; right: .4rem; }
+.watering-content .water { display: block; width: 1.3rem; margin: 0 auto; animation: swing 4s linear infinite; }
+.watering-content .number { font-size: 14px; color: #ffffff; text-align: center; }
+@keyframes treeShake
+{
+  0% {height: 3.56rem;}
+  20% {height: 3.76rem;}
+  50% {height: 3.56rem;}
+  75% {height: 3.66rem;}
+  100% {height: 3.56rem;}
+}
+@keyframes cloundAnimated1
+{
+  from {left: -150px;}
+  to {left: 100%;}
+}
+@keyframes cloundAnimated2
+{
+  from {left: 100%;}
+  to {left: -90px;}
+}
+@keyframes windMill
+{
+  from {transform: rotate(0);}
+  to {transform: rotate(360deg);}
+}
+@keyframes swing
+{
+  80% {transform: rotate(0);}
+  82% {transform: rotate(20deg);}
+  84% {transform: rotate(-20deg);}
+  86% {transform: rotate(14deg);}
+  88% {transform: rotate(-14deg);}
+  90% {transform: rotate(8deg);}
+  92% {transform: rotate(-8deg);}
+  94% {transform: rotate(4deg);}
+  96% {transform: rotate(-4deg);}
+  98% {transform: rotate(2deg);}
+  100% {transform: rotate(0);}
+}
+</style>
+<title>种树</title>
+</head>
+<body>
+<div class="container-box">
+  <img class="sunlight" src="images/light_v3.png" alt="">
+  <img class="clound1" src="images/cloudLeft_v2.webp" alt="">
+  <img class="clound2" src="images/cloudRight_v2.webp" alt="">
+  <img class="windMillBg" src="images/windMillBg_v2.webp" alt="">
+  <img class="windMill" src="images/windMill_v2.png" alt="">
+  <img class="tree-bed" src="images/health_good_land_v2.png" alt="">
+  <img class="tree-content" src="images/bud_v2.webp" alt="">
+  <!-- 水壶 -->
+  <div class="watering-content">
+    <img class="water" src="images/waterMovingBottleV2-1.png" alt="">
+    <p class="number">10g</p>
+  </div> 
+  <!-- 底部阴影盒子 -->
+  <div class="bottom-content">
+    <div class="fl wrap">
+      <div class="pic">
+        <img src="https://t20img.yangkeduo.com/a/81e766d44f39fa2ffc54be6295dea845bbbd29f3-1539611330?imageMogr2/thumbnail/100x" alt="">
+      </div>
+      <p class="name">放逐天际</p>
+    </div>
+    <div class="fl wrap">
+      <div class="pic">
+        <img src="https://t20img.yangkeduo.com/a/81e766d44f39fa2ffc54be6295dea845bbbd29f3-1539611330?imageMogr2/thumbnail/100x" alt="">
+      </div>
+      <p class="name">放逐天际</p>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<!-- <script src="js/pixi.min.js"></script> -->
+<script>
+$('.tree-content').click(function () {
+  var _this = $(this);
+  if(!_this.hasClass('tree-shake')) {
+    _this.addClass('tree-shake');
+    setTimeout(function(){
+      _this.removeClass('tree-shake');
+    }, 1000)
+  }
+})
+</script>
+</body>
+</html>

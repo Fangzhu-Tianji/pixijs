@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * { margin: 0; padding: 0; }
+  </style>
+</head>
+<body>
+<script src="../pixi/pixi.min.js"></script>
+<script>
+// 创建画布
+let app = new PIXI.Application({ 
+    width: 256, 
+    height: 256,                       
+    antialiasing: true, 
+    transparent: false, 
+    resolution: 1
+  }
+);
+// 渲染到页面
+document.body.appendChild(app.view);
+app.renderer.backgroundColor = 0xff4400;
+app.renderer.resize(window.innerWidth, window.innerHeight);
+app.renderer.view.style.border = "1px dashed black";
+</script>
+</body>
+</html>

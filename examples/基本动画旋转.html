@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * { margin: 0; padding: 0; }
+  </style>
+</head>
+<body>
+<script src="../pixi/pixi.min.js"></script>
+<script>
+// 创建画布
+let app = new PIXI.Application({ 
+    width: 800, 
+    height: 600,                       
+    backgroundColor: 0x1099bb
+  }
+);
+// 渲染到页面
+document.body.appendChild(app.view);
+var container = new PIXI.Container();
+app.stage.addChild(container);
+
+var texture = PIXI.Texture.fromImage('images/red.jpg');
+
+for(var i=0; i<25; i++) {
+  var bunny = new PIXI.Sprite(texture);
+  bunny.anchor.set(0.5);
+  bunny.x = (i % 5) * 100;
+  bunny.y = Math.floor(i / 5) * 100;
+  container.addChild(bunny);
+}
+
+container.x = app.screen.width / 2;
+container.y = app.screen.height / 2;
+
+container.pivot.x = container.width / 2;
+container.pivot.y = container.height / 2;
+
+// 移动精灵
+app.ticker.add(function(delta) {
+  container.rotation += 0.01 * delta;
+});
+//contaoner点击事件
+container.interactive = true;
+container.buttonMode = true;
+container.on('tap', function () {
+  console.log(333);
+  container.rotation = 0;
+})
+</script>
+</body>
+</html>

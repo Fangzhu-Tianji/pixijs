@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * { margin: 0; padding: 0; }
+  </style>
+</head>
+<body>
+<script src="../pixi/pixi.min.js"></script>
+<script>
+// 创建画布
+let app = new PIXI.Application({ 
+    width: window.innerWidth, 
+    height: window.innerHeight,   
+    backgroundColor: 0xff4400,                    
+    antialiasing: true, 
+    transparent: false, 
+    forceCanvas: true,
+    resolution: 1
+  }
+);
+// 渲染到页面
+document.body.appendChild(app.view);
+// 加载图片
+PIXI.loader
+  .add("images/cat.png")
+  .load(setup);
+
+function setup () {
+  let cat = new PIXI.Sprite(PIXI.loader.resources["images/cat.png"].texture);
+  app.stage.addChild(cat);
+}
+</script>
+</body>
+</html>

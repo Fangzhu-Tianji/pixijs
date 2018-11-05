@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Document</title>
+<style>
+  html,body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<div id="containerBox"></div>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="../pixi/pixi.min.js"></script>
+<script>
+// 创建画布
+let app = new PIXI.Application({ 
+    width: window.innerWidth, 
+    height: window.innerHeight,   
+    antialias: true,                    
+    backgroundColor: 0x1099bb
+  }
+);
+// 渲染到页面
+// document.body.appendChild(app.view);
+$('#containerBox').html(app.view);
+</script>
+</body>
+</html>
