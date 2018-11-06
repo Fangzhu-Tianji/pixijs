@@ -1,42 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset='utf-8' />
+<title>柑普茶</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="renderer" content="webkit"/>
+<meta name='apple-mobile-web-app-capable' content='yes' />
+<meta name='full-screen' content='true' />
+<meta name='x5-fullscreen' content='true' />
+<meta name='360-fullscreen' content='true' />
+<meta name="laya" screenorientation ="landscape"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta http-equiv='expires' content='0' />
+<meta http-equiv="Cache-Control" content="no-siteapp"/>
+<script src="js/flexible.js"></script>
 <link rel="stylesheet" href="css/reset.css">
-<script src="js/size.js"></script>
 <style>
 html,body { width: 100%; height: 100%; overflow: hidden; }
-.container-box { width: 100%; height: 100%; background: #9EE3EB url(images/bg5_fresh.webp) no-repeat center bottom; background-size: contain; position: relative; }
+.container-box { width: 100%; max-width: 10rem; height: 100%; background: #9EE3EB url(images/bg5_fresh.webp) no-repeat center bottom; background-size: contain; position: relative; margin: 0 auto; overflow: hidden; }
 /* 树 */
-.tree-bed { width: 4.24rem; position: absolute; left: 50%; bottom: 3.5rem; transform: translateX(-50%); }
-.tree-content { width: 2.66rem; height: 3.56rem; position: absolute; left: 50%; bottom: 4.5rem; transform: translateX(-50%); }
+.tree-bed { width: 5.653333rem; position: absolute; left: 50%; bottom: 4.666667rem; transform: translateX(-50%); }
+.tree-content { width: 3.546667rem; height: 4.746667rem; position: absolute; left: 50%; bottom: 6rem; transform: translateX(-50%); }
 .tree-shake { animation: treeShake 1s linear; }
 /* 云 */
 .sunlight { width: 200px; position: absolute; top: 0; right: 0; }
 .clound1 { width: 150px; position: absolute; top: 20px; animation: cloundAnimated1 70s linear infinite alternate; }
 .clound2 { width: 90px; position: absolute; top: 80px; animation: cloundAnimated2 60s linear infinite alternate; }
 /* 风车 */
-.windMillBg { width: .6rem; position: absolute; bottom: 7.8rem; left: 1.2rem; }
-.windMill { width: 1.2rem; position: absolute; bottom: 7.8rem; left: .9rem; animation: windMill 10s linear infinite; }
+.windMillBg { width: .8rem; position: absolute; bottom: 10.4rem; left: 1.6rem; }
+.windMill { width: 1.6rem; position: absolute; bottom: 10.4rem; left: 1.2rem; animation: windMill 10s linear infinite; }
 /* 底部阴影盒子 */
-.bottom-content { box-sizing: border-box; width: 100%; height: 1.6rem; padding: .2rem 0; background: rgba(0, 0, 0, .3); position: fixed; bottom: 0; left: 0; }
-.bottom-content .wrap { box-sizing: border-box; width: 1.2rem; padding: 0 .1rem; }
-.bottom-content .pic img { box-sizing: border-box; display: block; width: .9rem; height: .9rem; border: 1px solid #ffffff; border-radius: 50%; margin: 0 auto .05rem; }
+.bottom-content { box-sizing: border-box; width: 100%; height: 2.133333rem; padding: .266667rem 0; background: rgba(0, 0, 0, .3); position: absolute; bottom: 0; left: 0; }
+.bottom-content .wrap { box-sizing: border-box; width: 1.6rem; padding: 0 .133333rem; }
+.bottom-content .pic img { box-sizing: border-box; display: block; width: 1.2rem; height: 1.2rem; border: 1px solid #ffffff; border-radius: 50%; margin: 0 auto .066667rem; }
 .bottom-content .name { font-size: 12px; color: #ffffff; text-align: center; }
 /* 水壶 */
-.watering-content { width: 1.44rem; height: 1.6rem; background: url(images/wateringBg_v4.webp) no-repeat center top; background-size: contain; position: absolute; bottom: 1.6rem; right: .4rem; }
-.watering-content .water { display: block; width: 1.3rem; margin: 0 auto; animation: swing 4s linear infinite; }
+.watering-content { width: 1.92rem; height: 2.133333rem; background: url(images/wateringBg_v4.webp) no-repeat center top; background-size: contain; position: absolute; bottom: 2.133333rem; right: .533333rem; }
+.watering-content .water { display: block; width: 1.733333rem; margin: 0 auto; animation: kettleSwing 4s linear infinite; }
+.watering-content .water-move { display: block; width: 1.733333rem; position: absolute; top: 0; left: 0.093rem; opacity: 0; z-index: 10; transform: translate(-1.8rem, -7.8rem); }
 .watering-content .number { font-size: 14px; color: #ffffff; text-align: center; }
+.kettle-move { opacity: 1 !important; animation: kettleMove 5s ease-out forwards !important; }
+/* 浇水 */
+.watering { width: 2.56rem; height: 3.413333rem; background: url(images/watering.png); background-position: 0 0; background-size: cover; position: absolute; bottom: 8.533333rem; left: 50%; opacity: 1; }
+.watering-move { animation: wateringMove 1s 1s steps(1, start); }
+/* 暂停动画 */
+.animation-pause { animation-play-state: paused !important; }
+/* 树 */
 @keyframes treeShake
 {
-  0% {height: 3.56rem;}
-  20% {height: 3.76rem;}
-  50% {height: 3.56rem;}
-  75% {height: 3.66rem;}
-  100% {height: 3.56rem;}
+  0% {height: 4.746667rem;}
+  20% {height: 4.946667rem;}
+  50% {height: 4.746667rem;}
+  75% {height: 4.846667rem;}
+  100% {height: 4.746667rem;}
 }
+/* 云 */
 @keyframes cloundAnimated1
 {
   from {left: -150px;}
@@ -47,12 +65,14 @@ html,body { width: 100%; height: 100%; overflow: hidden; }
   from {left: 100%;}
   to {left: -90px;}
 }
+/* 风车 */
 @keyframes windMill
 {
   from {transform: rotate(0);}
   to {transform: rotate(360deg);}
 }
-@keyframes swing
+/* 浇水 */
+@keyframes kettleSwing
 {
   80% {transform: rotate(0);}
   82% {transform: rotate(20deg);}
@@ -65,6 +85,25 @@ html,body { width: 100%; height: 100%; overflow: hidden; }
   96% {transform: rotate(-4deg);}
   98% {transform: rotate(2deg);}
   100% {transform: rotate(0);}
+}
+@keyframes kettleMove
+{
+  0% {transform: translate(0, 0);}
+  20% {transform: translate(-1.8rem, -7.8rem); opacity: 1;}
+  21% {opacity: 0;}
+  78% {opacity: 0;}
+  79% {opacity: 1;}
+  80% {transform: translate(-1.8rem, -7.8rem);}
+  100% {transform: translate(0, 0);}
+}
+@keyframes wateringMove
+{
+  0% {background-position: 0 0; opacity: 1 !important; }
+  20% {background-position: -2.56rem 0;}
+  40% {background-position: -5.12rem 0;}
+  60% {background-position: -7.68rem 0;}
+  80% {background-position: -10.24rem 0;}
+  100% {background-position: -12.8rem 0;}
 }
 </style>
 <title>种树</title>
@@ -81,8 +120,10 @@ html,body { width: 100%; height: 100%; overflow: hidden; }
   <!-- 水壶 -->
   <div class="watering-content">
     <img class="water" src="images/waterMovingBottleV2-1.png" alt="">
+    <img class="water-move" src="images/waterMovingBottleV2-1.png" alt="">
     <p class="number">10g</p>
-  </div> 
+  </div>
+  <div class="watering"></div>
   <!-- 底部阴影盒子 -->
   <div class="bottom-content">
     <div class="fl wrap">
@@ -100,8 +141,8 @@ html,body { width: 100%; height: 100%; overflow: hidden; }
   </div>
 </div>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-<!-- <script src="js/pixi.min.js"></script> -->
 <script>
+// 点击树
 $('.tree-content').click(function () {
   var _this = $(this);
   if(!_this.hasClass('tree-shake')) {
@@ -111,6 +152,16 @@ $('.tree-content').click(function () {
     }, 1000)
   }
 })
+// 浇水
+$('.watering-content').click(function () {
+  $('.water-move').addClass('kettle-move');
+  $('.watering').addClass('watering-move');
+  setTimeout(function(){
+    $('.watering').removeClass('watering-move');
+    $('.water-move').removeClass('kettle-move');
+  }, 5000)
+})
+// 点击水壶
 </script>
 </body>
 </html>
