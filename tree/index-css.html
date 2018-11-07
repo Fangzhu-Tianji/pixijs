@@ -18,6 +18,14 @@
 <style>
 html,body { width: 100%; height: 100%; overflow: hidden; }
 .container-box { width: 100%; max-width: 10rem; height: 100%; background: #9EE3EB url(images/bg5_fresh.webp) no-repeat center bottom; background-size: contain; position: relative; margin: 0 auto; overflow: hidden; }
+/* 遮罩 */
+.mask { width: 100%; height: 100%; position: absolute; background: rgba(0, 0, 0, .8); z-index: 1; display: none; }
+/* 大礼包 */
+.treasure-box-wrapper { width: 100%; height: 8rem; position: absolute; top: 50%; left: 0; transform: translateY(-50%); z-index: 2; display: none; }
+.treasure-box-wrapper .treasure-bg { width: 8rem; height: 8rem; position: absolute; top: 0; left: 1rem; animation: windMill 10s linear infinite; }
+.treasure-box-wrapper .treasure-dot { width: 5.28rem; height: 5.706667rem; position: absolute; top: 1rem; left: 50%; transform: translateX(-50%); }
+.treasure-box-wrapper .treasure-img { width: 4.053333rem; height: 4.266667rem; position: absolute; top: 1.8rem; left: 3rem; animation: treasure-box 1.2s linear .6s infinite; }
+.treasure-box-wrapper .txt { font-size: .426667rem; color: #ffffff; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); }
 /* 树 */
 .tree-bed { width: 5.653333rem; position: absolute; left: 50%; bottom: 4.666667rem; transform: translateX(-50%); }
 .tree-content { width: 3.546667rem; height: 4.746667rem; position: absolute; left: 50%; bottom: 6rem; transform: translateX(-50%); }
@@ -39,10 +47,19 @@ html,body { width: 100%; height: 100%; overflow: hidden; }
 .watering-content .water { display: block; width: 1.733333rem; margin: 0 auto; animation: kettleSwing 4s linear infinite; }
 .watering-content .water-move { display: block; width: 1.733333rem; position: absolute; top: 0; left: 0.093rem; opacity: 0; z-index: 10; transform: translate(-1.8rem, -7.8rem); }
 .watering-content .number { font-size: 14px; color: #ffffff; text-align: center; }
-.kettle-move { opacity: 1 !important; animation: kettleMove 5s ease-out forwards !important; }
+.kettle-move { opacity: 1 !important; animation: kettleMove 3s ease-out forwards !important; }
 /* 浇水 */
-.watering { width: 2.56rem; height: 3.413333rem; background: url(images/watering.png); background-position: 0 0; background-size: cover; position: absolute; bottom: 8.533333rem; left: 50%; opacity: 1; }
+.watering { width: 2.56rem; height: 3.413333rem; background: url(images/watering.png); background-position: 0 0; background-size: cover; position: absolute; bottom: 8.533333rem; left: 50%; pointer-events: none; opacity: 0; }
 .watering-move { animation: wateringMove 1s 1s steps(1, start); }
+/* 浇水进度 */
+.watering-rate { width: 100%; position: absolute; left: 0; bottom: 3.6rem; }
+.watering-rate .rate { box-sizing: border-box; width: 4.96rem; height: .586667rem; padding-left: .6rem; padding-top: .106667rem; background: url(images/healthBg_v4.webp) no-repeat; background-size: cover; margin: 0 auto; }
+.watering-rate .left { width: 100px; height: .346667rem; transition: all .4s; }
+.watering-rate .right { width: .653333rem; height: .346667rem; }
+.watering-rate .txt { font-size: .346667rem; color: #ffffff; text-align: center; }
+/* 点击树的提示 */
+.tip-click { display: inline; padding: 2px; font-size: .373333rem; color: #69a126; text-align: center; background: #fff9bc; border: 2px solid #69a126; border-radius: 6px; position: absolute; bottom: 9rem; left: 50%; transform: translateX(-50%) scale(0); }
+.tip-click-show { animation: spreadAnimate .4s linear forwards; }
 /* 暂停动画 */
 .animation-pause { animation-play-state: paused !important; }
 /* 树 */
@@ -65,12 +82,6 @@ html,body { width: 100%; height: 100%; overflow: hidden; }
   from {left: 100%;}
   to {left: -90px;}
 }
-/* 风车 */
-@keyframes windMill
-{
-  from {transform: rotate(0);}
-  to {transform: rotate(360deg);}
-}
 /* 浇水 */
 @keyframes kettleSwing
 {
@@ -89,27 +100,57 @@ html,body { width: 100%; height: 100%; overflow: hidden; }
 @keyframes kettleMove
 {
   0% {transform: translate(0, 0);}
-  20% {transform: translate(-1.8rem, -7.8rem); opacity: 1;}
-  21% {opacity: 0;}
-  78% {opacity: 0;}
-  79% {opacity: 1;}
-  80% {transform: translate(-1.8rem, -7.8rem);}
-  100% {transform: translate(0, 0);}
+  33% {transform: translate(-1.8rem, -7.8rem); opacity: 1;}
+  34% {opacity: 0;}
+  65% {opacity: 0;}
+  66% {opacity: 1;}
+  67% {transform: translate(-1.8rem, -7.8rem);}
+  99% {opacity: 1;}
+  100% {transform: translate(0, 0); opacity: 0;}
 }
 @keyframes wateringMove
 {
-  0% {background-position: 0 0; opacity: 1 !important; }
+  0% {background-position: 0 0; }
   20% {background-position: -2.56rem 0;}
   40% {background-position: -5.12rem 0;}
   60% {background-position: -7.68rem 0;}
   80% {background-position: -10.24rem 0;}
   100% {background-position: -12.8rem 0;}
 }
+/* 大礼包动画 */
+@keyframes treasure-box {
+  0% {transform: rotate(0)}
+  8.3% {transform: rotate(20deg)}
+  16.6% {transform: rotate(0deg)}
+  24.9% {transform: rotate(-20deg)}
+  33.3% {transform: rotate(0deg)}
+  41.5% {transform: rotate(15deg)}
+  49.8% {transform: rotate(0deg)}
+  58.1% {transform: rotate(-15deg)}
+  66.4% {transform: rotate(0deg)}
+  74.7% {transform: rotate(5deg)}
+  83% {transform: rotate(0deg)}
+  91.3% {transform: rotate(-5deg)}
+  to {transform: rotate(0deg)}
+}
+/* 旋转 */
+@keyframes windMill
+{
+  from {transform: rotate(0);}
+  to {transform: rotate(360deg);}
+}
+/* 从中心向外扩散 */
+@keyframes spreadAnimate
+{
+  0% {transform: translateX(-50%) scale(0);}
+  100% {transform: translateX(-50%) scale(1);}
+}
 </style>
 <title>种树</title>
 </head>
 <body>
-<div class="container-box">
+<div class="container-box" id="app">
+  <div class="mask"></div>
   <img class="sunlight" src="images/light_v3.png" alt="">
   <img class="clound1" src="images/cloudLeft_v2.webp" alt="">
   <img class="clound2" src="images/cloudRight_v2.webp" alt="">
@@ -123,7 +164,16 @@ html,body { width: 100%; height: 100%; overflow: hidden; }
     <img class="water-move" src="images/waterMovingBottleV2-1.png" alt="">
     <p class="number">10g</p>
   </div>
+  <!-- 浇水 -->
   <div class="watering"></div>
+  <!-- 浇水进度 -->
+  <div class="watering-rate">
+    <div class="clearfix rate">
+      <img class="fl left" src="images/healthBlueMid_v3.webp" alt="" :style="{width:waterWidth + 'rem'}">
+      <img class="fl right" src="images/healthBlueHead_v3.webp" alt="">
+    </div>
+    <p class="txt">再浇{{waterNumTotal-waterNum}}次柑普树就长大成树了</p>
+  </div>
   <!-- 底部阴影盒子 -->
   <div class="bottom-content">
     <div class="fl wrap">
@@ -139,27 +189,74 @@ html,body { width: 100%; height: 100%; overflow: hidden; }
       <p class="name">放逐天际</p>
     </div>
   </div>
+  <!-- 大礼包 -->
+  <div class="treasure-box-wrapper">
+    <img class="treasure-bg" src="//pinduoduoimg.yangkeduo.com/cartoon_activity/fruiter/treasureBoxLight.png" alt="">
+    <img class="treasure-dot" src="//pinduoduoimg.yangkeduo.com/cartoon_activity/fruiter/treasureBoxDot_v2.png" alt="">
+    <img class="treasure-img" src="//pinduoduoimg.yangkeduo.com/cartoon_activity/fruiter/treasureBox.png" alt="">
+    <p class="txt">点击获取大礼包</p>
+  </div>
+  <!-- 点击树的提示信息 -->
+  <div class="tip-click">我有好多好玩的事需要告诉你</div>
 </div>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.5.17/vue.min.js"></script>
 <script>
+var app = new Vue({
+  el: '#app',
+  data: {
+    waterNumTotal: 6,
+    waterNum: 1,
+    waterWidth: 1
+  },
+  mounted: function () {
+    var _this = this;
+    _this.waterWidth = (3 / _this.waterNumTotal) * _this.waterNum;
+  },
+  watch: {
+    // 监控浇水次数
+    waterNum: function (curVal, oldVal) {
+      this.waterWidth = (3 / this.waterNumTotal) * curVal;
+    }
+  }
+})
 // 点击树
 $('.tree-content').click(function () {
   var _this = $(this);
   if(!_this.hasClass('tree-shake')) {
     _this.addClass('tree-shake');
+    $('.tip-click').addClass('tip-click-show');
     setTimeout(function(){
       _this.removeClass('tree-shake');
+      // 显示大礼包
+      // $('.treasure-box-wrapper').fadeIn();
+      // $('.mask').show();
     }, 1000)
+    setTimeout(function(){
+      $('.tip-click').removeClass('tip-click-show');
+    }, 5000)
   }
 })
 // 浇水
 $('.watering-content').click(function () {
   $('.water-move').addClass('kettle-move');
   $('.watering').addClass('watering-move');
+  $('.water').css({'opacity': 0});
+  setTimeout(function(){
+    $('.watering').css({'opacity': 1});
+    app.waterNum += 1;
+    if(app.waterNum >= app.waterNumTotal) {
+      app.waterNum = 0;
+    }
+  },1000)
+  setTimeout(function(){
+    $('.watering').css({'opacity': 0});
+  },2000)
   setTimeout(function(){
     $('.watering').removeClass('watering-move');
     $('.water-move').removeClass('kettle-move');
-  }, 5000)
+    $('.water').css({'opacity': 1});
+  }, 3000)
 })
 // 点击水壶
 </script>
