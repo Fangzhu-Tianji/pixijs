@@ -19,13 +19,66 @@
 html,body { width: 100%; height: 100%; overflow: hidden; }
 .container-box { width: 100%; max-width: 10rem; height: 100%; background: #9EE3EB url(images/bg5_fresh.webp) no-repeat center bottom; background-size: contain; position: relative; margin: 0 auto; overflow: hidden; }
 /* 遮罩 */
-.mask { width: 100%; height: 100%; position: absolute; background: rgba(0, 0, 0, .8); z-index: 1; display: none; }
-/* 大礼包 */
+.mask { width: 100%; height: 100%; position: absolute; background: rgba(0, 0, 0, .8); z-index: 19; display: none; }
+/* 大礼包弹出层 */
 .treasure-box-wrapper { width: 100%; height: 8rem; position: absolute; top: 50%; left: 0; transform: translateY(-50%); z-index: 2; display: none; }
 .treasure-box-wrapper .treasure-bg { width: 8rem; height: 8rem; position: absolute; top: 0; left: 1rem; animation: windMill 10s linear infinite; }
 .treasure-box-wrapper .treasure-dot { width: 5.28rem; height: 5.706667rem; position: absolute; top: 1rem; left: 50%; transform: translateX(-50%); }
 .treasure-box-wrapper .treasure-img { width: 4.053333rem; height: 4.266667rem; position: absolute; top: 1.8rem; left: 3rem; animation: treasure-box 1.2s linear .6s infinite; }
 .treasure-box-wrapper .txt { font-size: .426667rem; color: #ffffff; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); }
+/* 浇水寻宝弹出层 */
+.water-xunbao { width: 7.466667rem; height: 9.3rem; background-color: #bcd650; border-radius: .2rem; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%) translateY(-1rem); z-index: 20; display: none; }
+.water-xunbao .btn-close { width: .7rem; height: .7rem; position: absolute; top: -1.2rem; right: -.7rem; }
+.water-xunbao .top { box-sizing: border-box; width: 100%; height: 4.6rem; padding-top: 1.1rem; background: url(images/watering_popup_bg.png) no-repeat; background-size: cover; }
+.water-xunbao .top .title { font-size: .533333rem; color: #ffffff; text-shadow: 0 0.03rem 0.05rem #000; text-align: center; margin-bottom: .4rem; }
+.water-xunbao .day { width: 5.72rem; height: .7rem; margin: 0 auto 2rem; display: flex; justify-content: space-between; position: relative; }
+.water-xunbao .day .line { width: 100%; height: 1px; background: #b75b01; position: absolute; top: .35rem; }
+.water-xunbao .day .day-done { box-sizing: border-box; width: .72rem; height: .72rem; background-color: #f7ecd7; border-radius: 50%; font-size: .32rem; color: #b75b01; line-height: .72rem; text-align: center; border: .01rem solid #b75b01; z-index: 2; }
+.water-xunbao .day .day-img { border: 0; }
+.water-xunbao .day img { display: block; width: 100%; height: 100%; margin: 0; }
+.water-xunbao .text { width: 100%; height: .373333rem; font-size: .373333rem; line-height: .373333rem; color: #328c11; text-align: center; position: relative; margin-bottom: .3rem }
+.water-xunbao .text div::before,.water-xunbao .text div::after { content: ''; height: 1px; width: .25rem; background: #328c11; position: absolute; top: 44%; }
+.water-xunbao .text div::before { left: 12%; }
+.water-xunbao .text div::after { right: 12%; }
+.water-xunbao .list { width: 100%; height: 1.013333rem; padding: 0 2.4rem; display: flex; justify-content: space-between; margin-bottom: .4rem; }
+.water-xunbao .list .pic { width: 1.013333rem; height: 1.013333rem; }
+.water-xunbao .btn { display: block; width: 6.5rem; height: 1.2rem; border: 0; background: #ff710a; border-radius: .12rem; font-size: .5rem; line-height: 1.2rem; color: #fff; text-align: center; box-shadow: 0 0.08rem 0 0 #964103; margin: 0 auto; }
+/* 助力领水弹出层 */
+.water-zhuli { box-sizing: border-box; width: 7.466667rem; height: 7.8rem; padding-top: 1rem; background-color: #ffffff; border-radius: .2rem; box-shadow: 0 3px 0 #dbdbdb; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: 20; display: none; }
+.water-zhuli .btn-close { width: .7rem; height: .7rem; position: absolute; top: -1.2rem; right: -.7rem; }
+.water-zhuli .title { width: 100%; height: 1.28rem; position: absolute; left: 0; top: -.64rem; text-align: center; }
+.water-zhuli .title img { width: 6.346667rem; height: 100%; position: absolute; left: 50%; top: 0; transform: translateX(-50%); z-index: -1; }
+.water-zhuli .title .txt { font-size: .5rem; color: #ffffff; text-align: center; margin-top: .2rem; }
+.water-zhuli .help-title { font-size: .46rem; line-height: .8rem; font-weight: 600; color: #525252; text-align: center; }
+.water-zhuli .help-title span { font-size: .44rem; color: #ff5454; }
+.water-zhuli .help-title img { width: .48rem; height: .56rem; vertical-align: middle; }
+.water-zhuli .help-img { width: 100%; position: relative; margin: .4rem 0 .6rem; }
+.water-zhuli .help-img img { display: block; width: 3rem; height: 3rem; margin: 0 auto; }
+.water-zhuli .help-img .size { font-size: .7rem; font-weight: 600; color: #0f5564; position: absolute; top: 54%; left: 50%; transform: translateX(-50%); }
+.water-zhuli .btn { display: block; width: 6.5rem; height: 1.2rem; border: 0; background: #83cd33; border-radius: .12rem; font-size: .46rem; line-height: 1.2rem; color: #fff; text-align: center; margin: 0 auto; }
+/* 领水滴弹出层  */
+.water-di { width: 100%; height: 14rem; background: #ffffff; position: absolute; bottom: 0; left: 0; z-index: 2;}
+.water-di .title { box-sizing: border-box; width: 100%; height: 1.2rem; border-bottom: .06rem solid #ededed; position: relative; }
+.water-di .title .desc { font-size: .4rem; line-height: 1.2rem; font-weight: 600; color: #6b6b6b; padding-left: .4rem; }
+.water-di .title .close { font-size: .8rem; font-family: simsun; line-height: .8rem; padding: .2rem; color: #9c9c9c; position: absolute; top: 0; right: .2rem; }
+.water-di .content { width: 100%; height: 12.8rem; overflow-x: hidden; overflow-y: auto; }
+.water-di .wrap { padding: 0 .4rem; position: relative; }
+.water-di .box { padding: .4rem 0; border-bottom: .013333rem solid #f4f4f4; display: flex; }
+.water-di .wrap .pic { width: 1.6rem; height: 1.6rem; margin-right: .5rem; }
+.water-di .wrap .detail { flex: 1; background: pink; display: flex; align-items: center; }
+.water-di .wrap .desc { font-size: .426667rem; font-weight: 600; color: #151516; }
+.water-di .wrap .sub { margin-top: .1rem; font-size: 0; }
+.water-di .wrap .sub .txt { font-size: .373333rem; color: #6b6b6b; }
+.water-di .wrap .sub .img { display: inline-block; width: .48rem; height: .56rem; background-image: url(images/commonPopupDrip.png); background-size: 100%; vertical-align: middle; transform: scale(.8); }
+.water-di .wrap .btn { width: 1.8rem; height: .8rem; border-radius: .12rem; background: #83cd33; font-size: .373333rem; line-height: .8rem; text-align: center; color: #ffffff; }
+/* 可以点击的icon */
+.icon-wrap { width: 1.706667rem; height: 1.706667rem; }
+.right-icon { position: absolute; top: .2rem; right: 0; }
+.left-icon { position: absolute; top: .2rem; left: .2rem; }
+.bottom-icon { position: absolute; bottom: 2.133333rem; left: 0; }
+.icon-wrap .icon { width: 1.706667rem; height: 1.706667rem; }
+.icon-wrap .click { width: 1.2rem; height: .986667rem; position: absolute; top: .6rem; left: .6rem; z-index: 2; animation: handClick 1s ease-out infinite alternate; }
+.right-icon2 { top: 1.906667rem; }
 /* 树 */
 .tree-bed { width: 5.653333rem; position: absolute; left: 50%; bottom: 4.666667rem; transform: translateX(-50%); }
 .tree-content { width: 3.546667rem; height: 4.746667rem; position: absolute; left: 50%; bottom: 6rem; transform: translateX(-50%); }
@@ -145,6 +198,12 @@ html,body { width: 100%; height: 100%; overflow: hidden; }
   0% {transform: translateX(-50%) scale(0);}
   100% {transform: translateX(-50%) scale(1);}
 }
+/* 想要点击的手型 */
+@keyframes handClick
+{
+  0% {transform: translate(0,0);}
+  100% {transform: translate(.6rem,.6rem);}
+}
 </style>
 <title>种树</title>
 </head>
@@ -158,6 +217,22 @@ html,body { width: 100%; height: 100%; overflow: hidden; }
   <img class="windMill" src="images/windMill_v2.png" alt="">
   <img class="tree-bed" src="images/health_good_land_v2.png" alt="">
   <img class="tree-content" src="images/bud_v2.webp" alt="">
+  <!-- 右侧可以点击的按钮列表 -->
+  <div class="icon-wrap right-icon right-icon1" @click.stop="showWaterZhuli">
+    <img class="icon" src="images/help-icon.png" alt="">
+  </div>
+  <div class="icon-wrap right-icon right-icon2">
+    <img class="icon" src="images/fresherLimited.png" alt="">
+    <img class="click" src="images/beginClick_v3.png" alt="">
+  </div>
+  <!-- 左侧可以点击的按钮列表 -->
+  <div class="icon-wrap left-icon right-icon1" @click.stop="showWaterXunbao">
+    <img class="icon" src="images/wateringIcon-v2.png" alt="">
+  </div>
+  <!-- 底部可以点击的按钮列表 -->
+  <div class="icon-wrap bottom-icon bottom-icon1">
+    <img class="icon" src="images/getWater_v3.png" alt="">
+  </div>
   <!-- 水壶 -->
   <div class="watering-content">
     <img class="water" src="images/waterMovingBottleV2-1.png" alt="">
@@ -198,6 +273,79 @@ html,body { width: 100%; height: 100%; overflow: hidden; }
   </div>
   <!-- 点击树的提示信息 -->
   <div class="tip-click">我有好多好玩的事需要告诉你</div>
+  <!-- 弹出层 -->
+  <!-- 浇水寻宝 -->
+  <div class="water-xunbao">
+    <img class="btn-close" src="images/commonPopupCloseButtonV2.png" alt="" @click.stop="hideWaterXunbao">
+    <div class="top">
+      <p class="title">连续7天浇水开宝箱</p>
+      <div class="day">
+        <div class="line"></div>
+        <div class="day-done day-img">
+          <img src="images/watering-popup-right.png" alt="">
+        </div>
+        <div class="day-done">2天</div>
+        <div class="day-done">3天</div>
+        <div class="day-done">4天</div>
+        <div class="day-done">5天</div>
+        <div class="day-done">6天</div>
+        <div class="day-done day-img">
+          <img src="images/watering-popup-reword.png" alt="">
+        </div>
+      </div>
+      <div class="text">
+        <div>打开宝箱可随机获得以下奖励</div>
+      </div>
+      <div class="list">
+        <img class="pic" src="images/watering-popup-list-water-v3.png" alt="">
+        <img class="pic" src="images/watering-popup-list-coupon.png" alt="">
+      </div>
+      <button class="btn" @click.stop="hideWaterXunbao">去浇水</button>
+    </div>
+  </div>
+  <!-- 助力领水 -->
+  <div class="water-zhuli">
+    <img class="btn-close" src="images/commonPopupCloseButtonV2.png" alt="" @click.stop="hideWaterZhuli">
+    <div class="title">
+      <img src="images/health-startup-popup-title.png" alt="">
+      <p class="txt">助力领水</p>
+    </div>
+    <div class="help-title">
+      邀请好友助力可得
+      <span>20-50g</span>
+      <img src="images/commonPopupDrip.png" alt="">
+    </div>
+    <div class="help-img">
+      <img src="images/help-bottle-gain.png" alt="">
+      <p class="size">?</p>
+    </div>
+    <button class="btn">去邀请好友助力</button>
+  </div>
+  <!-- 领水滴 -->
+  <div class="water-di">
+    <div class="title">
+      <span class="desc">领水滴任务</span>
+      <span class="close">×</span>
+    </div>
+    <div class="content">
+      <div class="wrap">
+        <div class="box">
+          <img class="pic" src="images/missionShare_v2.png" alt="">
+          <div class="detail">
+            <div class="txt-content">
+              <div class="desc">分享领水</div>
+              <div class="sub">
+                <span class="txt">奖励45g</span>
+                <span class="img"></span>
+                <span class="txt">，次数不限</span>
+              </div>
+            </div>
+            <div class="btn">去完成</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/vue/2.5.17/vue.min.js"></script>
@@ -212,6 +360,32 @@ var app = new Vue({
   mounted: function () {
     var _this = this;
     _this.waterWidth = (3 / _this.waterNumTotal) * _this.waterNum;
+  },
+  methods: {
+    // 显示浇水寻宝
+    showWaterXunbao: function () {
+      $('.mask').fadeIn(500,function(){
+        $('.water-xunbao').show();
+      });
+    },
+    // 隐藏浇水寻宝
+    hideWaterXunbao: function () {
+      $('.water-xunbao').hide(function(){
+        $('.mask').fadeOut();
+      });
+    },
+    // 显示助力领水
+    showWaterZhuli: function () {
+      $('.mask').fadeIn(500,function(){
+        $('.water-zhuli').show();
+      });
+    },
+    // 隐藏助力领水
+    hideWaterZhuli: function () {
+      $('.water-zhuli').hide(function(){
+        $('.mask').fadeOut();
+      });
+    },
   },
   watch: {
     // 监控浇水次数
