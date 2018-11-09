@@ -3,13 +3,14 @@
 <head>
 <meta charset='utf-8' />
 <title>柑普茶</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name='viewport' content='width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no'
+	/>
 <meta name="renderer" content="webkit"/>
 <meta name='apple-mobile-web-app-capable' content='yes' />
-<meta name='full-screen' content='true' />
+<meta name='full-screen' content='yes' />
 <meta name='x5-fullscreen' content='true' />
 <meta name='360-fullscreen' content='true' />
-<meta name="laya" screenorientation ="landscape"/>
+<meta name="x5-page-mode" content="app">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 <meta http-equiv='expires' content='0' />
 <meta http-equiv="Cache-Control" content="no-siteapp"/>
@@ -17,11 +18,11 @@
 <link rel="stylesheet" href="css/reset.css">
 <style>
 html,body { width: 100%; height: 100%; overflow: hidden; }
-.container-box { width: 100%; max-width: 10rem; height: 100%; background: #9EE3EB url(images/bg5_fresh.webp) no-repeat center bottom; background-size: contain; position: relative; margin: 0 auto; overflow: hidden; }
+.container-box { width: 100%; max-width: 10rem; height: 100%; background: #9EE3EB url(images/bg5_fresh.png) no-repeat center bottom; background-size: 100%; position: relative; margin: 0 auto; overflow: hidden; }
 /* 遮罩 */
 .mask { width: 100%; height: 100%; position: absolute; background: rgba(0, 0, 0, .8); z-index: 19; display: none; }
 /* 大礼包弹出层 */
-.treasure-box-wrapper { width: 100%; height: 8rem; position: absolute; top: 50%; left: 0; transform: translateY(-50%); z-index: 2; display: none; }
+.treasure-box-wrapper { width: 10rem; height: 8rem; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: 20; display: none; }
 .treasure-box-wrapper .treasure-bg { width: 8rem; height: 8rem; position: absolute; top: 0; left: 1rem; animation: windMill 10s linear infinite; }
 .treasure-box-wrapper .treasure-dot { width: 5.28rem; height: 5.706667rem; position: absolute; top: 1rem; left: 50%; transform: translateX(-50%); }
 .treasure-box-wrapper .treasure-img { width: 4.053333rem; height: 4.266667rem; position: absolute; top: 1.8rem; left: 3rem; animation: treasure-box 1.2s linear .6s infinite; }
@@ -57,25 +58,43 @@ html,body { width: 100%; height: 100%; overflow: hidden; }
 .water-zhuli .help-img .size { font-size: .7rem; font-weight: 600; color: #0f5564; position: absolute; top: 54%; left: 50%; transform: translateX(-50%); }
 .water-zhuli .btn { display: block; width: 6.5rem; height: 1.2rem; border: 0; background: #83cd33; border-radius: .12rem; font-size: .46rem; line-height: 1.2rem; color: #fff; text-align: center; margin: 0 auto; }
 /* 领水滴弹出层  */
-.water-di { width: 100%; height: 14rem; background: #ffffff; position: absolute; bottom: 0; left: 0; z-index: 2;}
+.water-di { width: 100%; height: 11rem; background: #ffffff; position: absolute; bottom: 0; left: 0; z-index: 20; transform: translateY(11rem); transition: all .4s; }
+.water-di.active { transform: translateY(0); }
 .water-di .title { box-sizing: border-box; width: 100%; height: 1.2rem; border-bottom: .06rem solid #ededed; position: relative; }
 .water-di .title .desc { font-size: .4rem; line-height: 1.2rem; font-weight: 600; color: #6b6b6b; padding-left: .4rem; }
 .water-di .title .close { font-size: .8rem; font-family: simsun; line-height: .8rem; padding: .2rem; color: #9c9c9c; position: absolute; top: 0; right: .2rem; }
-.water-di .content { width: 100%; height: 12.8rem; overflow-x: hidden; overflow-y: auto; }
+.water-di .content { width: 100%; height: 9.8rem; overflow-x: hidden; overflow-y: auto; }
+.water-di .content::-webkit-scrollbar { display:none; }
 .water-di .wrap { padding: 0 .4rem; position: relative; }
-.water-di .box { padding: .4rem 0; border-bottom: .013333rem solid #f4f4f4; display: flex; }
+.water-di .box { box-sizing: border-box; padding: .2rem 0; min-height: 2rem; border-bottom: .013333rem solid #f4f4f4; display: flex; align-items: center; }
 .water-di .wrap .pic { width: 1.6rem; height: 1.6rem; margin-right: .5rem; }
-.water-di .wrap .detail { flex: 1; background: pink; display: flex; align-items: center; }
-.water-di .wrap .desc { font-size: .426667rem; font-weight: 600; color: #151516; }
-.water-di .wrap .sub { margin-top: .1rem; font-size: 0; }
-.water-di .wrap .sub .txt { font-size: .373333rem; color: #6b6b6b; }
-.water-di .wrap .sub .img { display: inline-block; width: .48rem; height: .56rem; background-image: url(images/commonPopupDrip.png); background-size: 100%; vertical-align: middle; transform: scale(.8); }
-.water-di .wrap .btn { width: 1.8rem; height: .8rem; border-radius: .12rem; background: #83cd33; font-size: .373333rem; line-height: .8rem; text-align: center; color: #ffffff; }
+.water-di .wrap .detail { flex: 1; display: flex; align-items: center; }
+.water-di .wrap  .txt-content { flex: 1; }
+.water-di .wrap .desc { font-size: .426667rem; font-weight: 600; color: #151516; margin-bottom: .1rem; }
+.water-di .wrap .sub { font-size: 0; }
+.water-di .wrap .sub .txt { font-size: .373333rem; line-height: 1; color: #6b6b6b; vertical-align: middle; }
+.water-di .wrap .sub .img { display: inline-block; width: .46rem; height: .5rem; background: url(images/commonPopupDrip.png) no-repeat; background-size: 100%; transform: scale(.8); vertical-align: middle; }
+.water-di .wrap .btn { width: 1.8rem; height: .8rem; border-radius: .12rem; background: #83cd33; font-size: .34rem; line-height: .8rem; text-align: center; color: #ffffff; }
+.water-di .wrap .btn.no-start { background: #dbdbdb; }
+/* 引导层 */
+.guide-box { width: 1.9rem; height: 1.9rem; background: #ffffff; border-radius: 50%; position: absolute; top: .1rem; left: .1rem; z-index: 100; transition: all .4s; }
+.guide-box.two { top: 100%; transform: translateY(-3.9rem); }
+.guide-box.three { width: 2.4rem; height: 2.4rem; left: 100%; top: 100%; transform: translate(-2.7rem,-4.4rem); }
+.z-index101 { z-index: 101; }
+.guide-content .txt { font-size: .36rem; color: #ffffff; position: absolute; left: 50%; transform: translateX(-50%); z-index: 101; }
+.guide-content .btn { display: inline; padding: .2rem .6rem; font-size: .4rem; color: #ffffff; border: 1px solid #ffffff; border-radius: 1rem; position: absolute; left: 50%; transform: translateX(-50%); z-index: 101; }
+.guide-one .txt { top: 2rem; }
+.guide-one .btn { top: 4rem; }
+.guide-two .txt { bottom: 4rem; }
+.guide-two .btn { bottom: 6rem; }
+.guide-three .txt { bottom: 4rem; }
+.guide-three .btn { bottom: 6rem; }
+.guide-box,.guide-one,.guide-two,.guide-three { display: none; }
 /* 可以点击的icon */
 .icon-wrap { width: 1.706667rem; height: 1.706667rem; }
 .right-icon { position: absolute; top: .2rem; right: 0; }
 .left-icon { position: absolute; top: .2rem; left: .2rem; }
-.bottom-icon { position: absolute; bottom: 2.133333rem; left: 0; }
+.bottom-icon { position: absolute; bottom: 2.133333rem; left: .2rem; }
 .icon-wrap .icon { width: 1.706667rem; height: 1.706667rem; }
 .icon-wrap .click { width: 1.2rem; height: .986667rem; position: absolute; top: .6rem; left: .6rem; z-index: 2; animation: handClick 1s ease-out infinite alternate; }
 .right-icon2 { top: 1.906667rem; }
@@ -96,7 +115,7 @@ html,body { width: 100%; height: 100%; overflow: hidden; }
 .bottom-content .pic img { box-sizing: border-box; display: block; width: 1.2rem; height: 1.2rem; border: 1px solid #ffffff; border-radius: 50%; margin: 0 auto .066667rem; }
 .bottom-content .name { font-size: 12px; color: #ffffff; text-align: center; }
 /* 水壶 */
-.watering-content { width: 1.92rem; height: 2.133333rem; background: url(images/wateringBg_v4.webp) no-repeat center top; background-size: contain; position: absolute; bottom: 2.133333rem; right: .533333rem; }
+.watering-content { width: 1.92rem; height: 2.133333rem; background: url(images/wateringBg_v4.png) no-repeat center top; background-size: contain; position: absolute; bottom: 2.133333rem; right: .533333rem; }
 .watering-content .water { display: block; width: 1.733333rem; margin: 0 auto; animation: kettleSwing 4s linear infinite; }
 .watering-content .water-move { display: block; width: 1.733333rem; position: absolute; top: 0; left: 0.093rem; opacity: 0; z-index: 10; transform: translate(-1.8rem, -7.8rem); }
 .watering-content .number { font-size: 14px; color: #ffffff; text-align: center; }
@@ -106,10 +125,10 @@ html,body { width: 100%; height: 100%; overflow: hidden; }
 .watering-move { animation: wateringMove 1s 1s steps(1, start); }
 /* 浇水进度 */
 .watering-rate { width: 100%; position: absolute; left: 0; bottom: 3.6rem; }
-.watering-rate .rate { box-sizing: border-box; width: 4.96rem; height: .586667rem; padding-left: .6rem; padding-top: .106667rem; background: url(images/healthBg_v4.webp) no-repeat; background-size: cover; margin: 0 auto; }
-.watering-rate .left { width: 100px; height: .346667rem; transition: all .4s; }
-.watering-rate .right { width: .653333rem; height: .346667rem; }
-.watering-rate .txt { font-size: .346667rem; color: #ffffff; text-align: center; }
+.watering-rate .rate { box-sizing: border-box; width: 182px; height: 22px; padding-left: 22px; padding-top: 4px; background: url(images/healthBg_v4.png) no-repeat; background-size: cover; margin: 0 auto; }
+.watering-rate .left { width: 0; height: 13px; transition: all .4s; }
+.watering-rate .right { width: 24px; height: 13px; }
+.watering-rate .txt { font-size: 12px; color: #ffffff; text-align: center; }
 /* 点击树的提示 */
 .tip-click { display: inline; padding: 2px; font-size: .373333rem; color: #69a126; text-align: center; background: #fff9bc; border: 2px solid #69a126; border-radius: 6px; position: absolute; bottom: 9rem; left: 50%; transform: translateX(-50%) scale(0); }
 .tip-click-show { animation: spreadAnimate .4s linear forwards; }
@@ -211,12 +230,12 @@ html,body { width: 100%; height: 100%; overflow: hidden; }
 <div class="container-box" id="app">
   <div class="mask"></div>
   <img class="sunlight" src="images/light_v3.png" alt="">
-  <img class="clound1" src="images/cloudLeft_v2.webp" alt="">
-  <img class="clound2" src="images/cloudRight_v2.webp" alt="">
-  <img class="windMillBg" src="images/windMillBg_v2.webp" alt="">
+  <img class="clound1" src="images/cloudLeft_v2.png" alt="">
+  <img class="clound2" src="images/cloudRight_v2.png" alt="">
+  <img class="windMillBg" src="images/windMillBg_v2.png" alt="">
   <img class="windMill" src="images/windMill_v2.png" alt="">
   <img class="tree-bed" src="images/health_good_land_v2.png" alt="">
-  <img class="tree-content" src="images/bud_v2.webp" alt="">
+  <img class="tree-content" src="images/bud_v2.png" alt="">
   <!-- 右侧可以点击的按钮列表 -->
   <div class="icon-wrap right-icon right-icon1" @click.stop="showWaterZhuli">
     <img class="icon" src="images/help-icon.png" alt="">
@@ -226,15 +245,15 @@ html,body { width: 100%; height: 100%; overflow: hidden; }
     <img class="click" src="images/beginClick_v3.png" alt="">
   </div>
   <!-- 左侧可以点击的按钮列表 -->
-  <div class="icon-wrap left-icon right-icon1" @click.stop="showWaterXunbao">
+  <div class="icon-wrap left-icon right-icon1" id="waterXunBao" @click.stop="showWaterXunbao">
     <img class="icon" src="images/wateringIcon-v2.png" alt="">
   </div>
   <!-- 底部可以点击的按钮列表 -->
-  <div class="icon-wrap bottom-icon bottom-icon1">
+  <div class="icon-wrap bottom-icon bottom-icon1" id="waterDi" @click.stop="showWaterDi">
     <img class="icon" src="images/getWater_v3.png" alt="">
   </div>
   <!-- 水壶 -->
-  <div class="watering-content">
+  <div class="watering-content" id="waterHu">
     <img class="water" src="images/waterMovingBottleV2-1.png" alt="">
     <img class="water-move" src="images/waterMovingBottleV2-1.png" alt="">
     <p class="number">10g</p>
@@ -244,8 +263,8 @@ html,body { width: 100%; height: 100%; overflow: hidden; }
   <!-- 浇水进度 -->
   <div class="watering-rate">
     <div class="clearfix rate">
-      <img class="fl left" src="images/healthBlueMid_v3.webp" alt="" :style="{width:waterWidth + 'rem'}">
-      <img class="fl right" src="images/healthBlueHead_v3.webp" alt="">
+      <img class="fl left" src="images/healthBlueMid_v3.png" alt="" :style="{width:waterWidth + 'rem'}">
+      <img class="fl right" src="images/healthBlueHead_v3.png" alt="">
     </div>
     <p class="txt">再浇{{waterNumTotal-waterNum}}次柑普树就长大成树了</p>
   </div>
@@ -264,16 +283,16 @@ html,body { width: 100%; height: 100%; overflow: hidden; }
       <p class="name">放逐天际</p>
     </div>
   </div>
+  <!-- 点击树的提示信息 -->
+  <div class="tip-click">我有好多好玩的事需要告诉你</div>
+  <!-- 弹出层 -->
   <!-- 大礼包 -->
   <div class="treasure-box-wrapper">
     <img class="treasure-bg" src="//pinduoduoimg.yangkeduo.com/cartoon_activity/fruiter/treasureBoxLight.png" alt="">
     <img class="treasure-dot" src="//pinduoduoimg.yangkeduo.com/cartoon_activity/fruiter/treasureBoxDot_v2.png" alt="">
-    <img class="treasure-img" src="//pinduoduoimg.yangkeduo.com/cartoon_activity/fruiter/treasureBox.png" alt="">
+    <img class="treasure-img" src="//pinduoduoimg.yangkeduo.com/cartoon_activity/fruiter/treasureBox.png" alt="" @click.stop="hideTreasureBox">
     <p class="txt">点击获取大礼包</p>
   </div>
-  <!-- 点击树的提示信息 -->
-  <div class="tip-click">我有好多好玩的事需要告诉你</div>
-  <!-- 弹出层 -->
   <!-- 浇水寻宝 -->
   <div class="water-xunbao">
     <img class="btn-close" src="images/commonPopupCloseButtonV2.png" alt="" @click.stop="hideWaterXunbao">
@@ -325,7 +344,7 @@ html,body { width: 100%; height: 100%; overflow: hidden; }
   <div class="water-di">
     <div class="title">
       <span class="desc">领水滴任务</span>
-      <span class="close">×</span>
+      <span class="close" @click.stop="hideWaterDi">×</span>
     </div>
     <div class="content">
       <div class="wrap">
@@ -335,9 +354,91 @@ html,body { width: 100%; height: 100%; overflow: hidden; }
             <div class="txt-content">
               <div class="desc">分享领水</div>
               <div class="sub">
+                <span class="txt">奖励8-20g</span>
+                <img class="img" src="images/commonPopupDrip.png" alt="">
+                <span class="txt">，每天5次</span>
+              </div>
+            </div>
+            <div class="btn">去完成</div>
+          </div>
+        </div>
+      </div>
+      <div class="wrap">
+        <div class="box">
+          <img class="pic" src="images/noonNightMission_v2.png" alt="">
+          <div class="detail">
+            <div class="txt-content">
+              <div class="desc">水滴福袋</div>
+              <div class="sub">
+                <span class="txt">每日12-15点，20-22点</span>
+                <img class="img" src="images/commonPopupDrip.png" alt="">
+              </div>
+              <div class="sub">
+                <span class="txt">开启福袋可得5-50g</span>
+                <img class="img" src="images/commonPopupDrip.png" alt="">
+              </div>
+            </div>
+            <div class="btn no-start">12:00开启</div>
+          </div>
+        </div>
+      </div>
+      <div class="wrap">
+        <div class="box">
+          <img class="pic" src="images/missionInviteJoin_v3.png" alt="">
+          <div class="detail">
+            <div class="txt-content">
+              <div class="desc">邀请好友来种树</div>
+              <div class="sub">
                 <span class="txt">奖励45g</span>
-                <span class="img"></span>
+                <img class="img" src="images/commonPopupDrip.png" alt="">
                 <span class="txt">，次数不限</span>
+              </div>
+            </div>
+            <div class="btn">去完成</div>
+          </div>
+        </div>
+      </div>
+      <div class="wrap">
+        <div class="box">
+          <img class="pic" src="images/missionInviteDownload_v3.png" alt="">
+          <div class="detail">
+            <div class="txt-content">
+              <div class="desc">邀请好友下载APP</div>
+              <div class="sub">
+                <span class="txt">奖励300g</span>
+                <img class="img" src="images/commonPopupDrip.png" alt="">
+                <span class="txt">，次数不限</span>
+              </div>
+            </div>
+            <div class="btn">去完成</div>
+          </div>
+        </div>
+      </div>
+      <div class="wrap">
+        <div class="box">
+          <img class="pic" src="images/missionWakeup.png" alt="">
+          <div class="detail">
+            <div class="txt-content">
+              <div class="desc">邀请好友回来浇水</div>
+              <div class="sub">
+                <span class="txt">奖励25g</span>
+                <img class="img" src="images/commonPopupDrip.png" alt="">
+                <span class="txt">，次数不限</span>
+              </div>
+            </div>
+            <div class="btn">去完成</div>
+          </div>
+        </div>
+      </div>
+      <div class="wrap">
+        <div class="box">
+          <img class="pic" src="images/missionDownload_v2.png" alt="">
+          <div class="detail">
+            <div class="txt-content">
+              <div class="desc">下载APP</div>
+              <div class="sub">
+                <span class="txt">微信登录可领200g</span>
+                <img class="img" src="images/commonPopupDrip.png" alt="">
               </div>
             </div>
             <div class="btn">去完成</div>
@@ -346,6 +447,20 @@ html,body { width: 100%; height: 100%; overflow: hidden; }
       </div>
     </div>
   </div>
+  <!-- 引导层 -->
+  <div class="guide-box"></div>
+  <div class="guide-content guide-one">
+    <p class="txt">这里可以连续浇水开宝箱，<br>赶快开启专属你的宝箱吧！</p>
+    <div class="btn" onclick="guide01()">知道了</div>
+  </div>
+  <div class="guide-content guide-two">
+    <p class="txt">这里可以做任务领水滴，<br>记得每天都过来哟！</p>
+    <div class="btn" onclick="guide02()">知道了</div>
+  </div>
+  <div class="guide-content guide-three">
+    <p class="txt">这里可以浇水让树快快长大，<br>让我们一起进入吧！</p>
+    <div class="btn" onclick="guide03()">开始</div>
+  </div>
 </div>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/vue/2.5.17/vue.min.js"></script>
@@ -353,6 +468,7 @@ html,body { width: 100%; height: 100%; overflow: hidden; }
 var app = new Vue({
   el: '#app',
   data: {
+    isFirst: false,
     waterNumTotal: 6,
     waterNum: 1,
     waterWidth: 1
@@ -360,10 +476,20 @@ var app = new Vue({
   mounted: function () {
     var _this = this;
     _this.waterWidth = (3 / _this.waterNumTotal) * _this.waterNum;
+    // 引导层
+    localStorage.getItem("isFirst") == null ? _this.isFirst = false : _this.isFirst = true;
+    if(!_this.isFirst) {
+      $('.mask').fadeIn(500,function(){
+        $('.guide-box').show();
+        $('.guide-one').show();
+        $('#waterXunBao').addClass('z-index101');
+      });
+    }
   },
   methods: {
     // 显示浇水寻宝
     showWaterXunbao: function () {
+      if(!this.isFirst) {return;}
       $('.mask').fadeIn(500,function(){
         $('.water-xunbao').show();
       });
@@ -386,6 +512,24 @@ var app = new Vue({
         $('.mask').fadeOut();
       });
     },
+    // 显示领水滴
+    showWaterDi: function () {
+      if(!this.isFirst) {return;}
+      $('.mask').fadeIn(500,function(){
+        $('.water-di').addClass('active');
+      });
+    },
+    // 隐藏助力领水
+    hideWaterDi: function () {
+      $('.water-di').removeClass('active');
+      $('.mask').fadeOut();
+    },
+    // 隐藏大礼包
+    hideTreasureBox: function () {
+      $('.treasure-box-wrapper').fadeOut(function(){
+        $('.mask').fadeOut();
+      });
+    }
   },
   watch: {
     // 监控浇水次数
@@ -397,42 +541,70 @@ var app = new Vue({
 // 点击树
 $('.tree-content').click(function () {
   var _this = $(this);
-  if(!_this.hasClass('tree-shake')) {
+  if(!$('.tip-click').hasClass('tip-click-show')) {
     _this.addClass('tree-shake');
     $('.tip-click').addClass('tip-click-show');
     setTimeout(function(){
       _this.removeClass('tree-shake');
-      // 显示大礼包
-      // $('.treasure-box-wrapper').fadeIn();
-      // $('.mask').show();
     }, 1000)
     setTimeout(function(){
       $('.tip-click').removeClass('tip-click-show');
     }, 5000)
   }
 })
-// 浇水
+// 浇水点击水壶
 $('.watering-content').click(function () {
-  $('.water-move').addClass('kettle-move');
-  $('.watering').addClass('watering-move');
-  $('.water').css({'opacity': 0});
-  setTimeout(function(){
-    $('.watering').css({'opacity': 1});
-    app.waterNum += 1;
-    if(app.waterNum >= app.waterNumTotal) {
-      app.waterNum = 0;
-    }
-  },1000)
-  setTimeout(function(){
-    $('.watering').css({'opacity': 0});
-  },2000)
-  setTimeout(function(){
-    $('.watering').removeClass('watering-move');
-    $('.water-move').removeClass('kettle-move');
-    $('.water').css({'opacity': 1});
-  }, 3000)
+  if(!app.isFirst) {return;}
+  if(!$('.watering').hasClass('watering-move')) {
+    $('.water-move').addClass('kettle-move');
+    $('.watering').addClass('watering-move');
+    $('.water').css({'opacity': 0});
+    setTimeout(function(){
+      $('.watering').css({'opacity': 1});
+      app.waterNum += 1;
+      if(app.waterNum >= app.waterNumTotal) {
+        app.waterNum = 0;
+      }
+    },1000)
+    setTimeout(function(){
+      $('.watering').css({'opacity': 0});
+    },2000)
+    setTimeout(function(){
+      $('.watering').removeClass('watering-move');
+      $('.water-move').removeClass('kettle-move');
+      $('.water').css({'opacity': 1});
+      // 显示大礼包
+      if(app.waterNum == 0) {
+        $('.mask').fadeIn(500,function(){
+          $('.treasure-box-wrapper').show();
+        });
+      }
+    }, 3000)
+  }
 })
-// 点击水壶
+// 页面引导层
+function guide01 () {
+  $('.guide-box').addClass('two');
+  $('.guide-one').hide();
+  $('.guide-two').show();
+  $('#waterXunBao').removeClass('z-index101');
+  $('#waterDi').addClass('z-index101');
+}
+function guide02 () {
+  $('.guide-box').addClass('three');
+  $('.guide-two').hide();
+  $('.guide-three').show();
+  $('#waterDi').removeClass('z-index101');
+  $('#waterHu').addClass('z-index101');
+}
+function guide03 () {
+  $('.guide-box').hide();
+  $('.guide-three').hide();
+  $('#waterHu').removeClass('z-index101');
+  $('.mask').fadeOut();
+  app.isFirst = true;
+  localStorage.setItem("isFirst",true);
+}
 </script>
 </body>
 </html>
