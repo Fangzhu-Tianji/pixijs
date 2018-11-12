@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="css/reset.css">
 <style>
 html,body { width: 100%; height: 100%; overflow: hidden; }
-.container-box { width: 100%; max-width: 10rem; height: 100%; background: #9EE3EB url(images/bg5_fresh.png) no-repeat center bottom; background-size: 100%; position: relative; margin: 0 auto; overflow: hidden; }
+.container-box { width: 100%; max-width: 10rem; height: 100%; background: #9EE3EB url(images/bg5_fresh.jpg) no-repeat center bottom; background-size: 100%; position: relative; margin: 0 auto; overflow: hidden; }
 /* 遮罩 */
 .mask { width: 100%; height: 100%; position: absolute; background: rgba(0, 0, 0, .8); z-index: 19; display: none; }
 /* 大礼包弹出层 */
@@ -267,7 +267,7 @@ html,body { width: 100%; height: 100%; overflow: hidden; }
       <img class="fl left" src="images/healthBlueMid_v3.png" alt="" :style="{width:waterWidth + 'rem'}">
       <img class="fl right" src="images/healthBlueHead_v3.png" alt="">
     </div>
-    <p class="txt">再浇{{waterNumTotal-waterNum}}次柑普树就长大成树了</p>
+    <p class="txt" v-text="'再浇' + (waterNumTotal-waterNum) + '次柑普树就长大成树了'"></p>
   </div>
   <!-- 底部阴影盒子 -->
   <div class="bottom-content">
